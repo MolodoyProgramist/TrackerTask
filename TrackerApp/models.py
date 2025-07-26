@@ -1,25 +1,28 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.forms import CharField
+from django.utils import timezone
 
 #Deadline = Термін виконання (дата)
 class Task(models.Model):
     STATUS_CHOICES = [
-        ("todo", "To Do"),
-        ("in_progress", "In Progress"),
-        ("done", "Done"),
+        ("Not selected", "Не выбрано"),
+        ("В ожидании", "В ожидании"),
+        ("В прогрессе", "В прогрессе"),
+        ("Готово", "Готово"),
     ]
 
     PRIORITY_CHOICES = [
-        ("low", "Low"),
-        ("medium", "Medium"),
-        ("high", "High"),
+        ("Not selected", "Не выбрано"),
+        ("low", "Низкий"),
+        ("medium", "Средний"),
+        ("high", "Высокий"),
     ]
     title = models.CharField(max_length=100)
     description = models.TextField(null=True, blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default="todo")
-    priority = models.CharField(max_length=60, choices=PRIORITY_CHOICES, default="medium")
+    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default="Не выбрано")
+    priority = models.CharField(max_length=60, choices=PRIORITY_CHOICES, default="Не выбрано")
     deadline = models.DateTimeField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
 
@@ -28,11 +31,12 @@ class Task(models.Model):
 
 class Comment(models.Model):
     text = models.TextField()
-    data = models.DateTimeField(auto_now_add=True)
+    data = models.DateTimeField(auto_now_add=True, editable=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
-    media = models.FileField(upload_to="comments")
+    media = models.FileField(upload_to="comments", null=True, blank=True)
     comment = models.CharField(max_length=60)
+    created_at = models.DateTimeField(default=timezone.now)
 
 
     def __str__(self):

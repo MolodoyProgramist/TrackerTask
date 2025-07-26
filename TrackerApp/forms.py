@@ -6,15 +6,22 @@ from django.forms import DateInput
 from .models import  Task, Comment
 
 
-# class TaskForm(forms.ModelForm):
-#     class Meta:
-#         model = Task
-#         fields = ['title', 'description', 'author', 'status', 'priority', 'deadline', 'created']
-#
-# class CommentForm(forms.ModelForm):
-    #class Meta:
-        #model = Comment
-        #fields = ['text','data','author','task', 'media', 'comment']
+class TaskForm(forms.ModelForm):
+     class Meta:
+         model = Task
+         fields = ['title', 'description', 'author', 'status', 'priority', 'deadline']
+
+         widgets = {
+             'deadline': forms.DateTimeInput(attrs={
+                 'type': 'datetime-local',
+                 'class': 'form-control',
+             }),
+         }
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['text','author','task', 'media', 'comment']
 
 
 

@@ -21,8 +21,8 @@ from TrackerApp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-#     path('tasks/', views.TaskListView, name='task-list'),
-#     path('tasks/create/', views.TaskCreateView, name='task-create'),
-#     path('tasks/<int:pk>/', views.TaskDetailView, name='task-detail'),
-#     path('tasks/<int:task_id>/comment/', views.CommentView, name='task-comment'),
+    path('tasks/', views.TaskListView, name='task-list'),
+    path('tasks/create/', views.TaskCreateView, name='task-create'),
+    path('tasks/<int:pk>/', views.TaskDetailView, name='task-detail'),
+    path('tasks/<int:task_id>/comment/', views.CommentView, name='task-comment'),
 ]

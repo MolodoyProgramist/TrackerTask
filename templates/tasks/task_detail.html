@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>{{ task.title }}</h1>
+    <p><strong>Описание:</strong> {{ task.description }}</p>
+
+    <p><strong>Статус:</strong> {{ task.status }}</p>
+
+    <p><strong>Дедлайн:</strong>
+        {% if task.deadline %}
+            {{ task.deadline|date:"d M Y H:i" }}
+        {% else %}
+            Не назначен
+        {% endif %}
+    </p>
+
+    <hr>
+
+    <h2>Комментарии</h2>
+    <ul>
+        {% for comment in comments %}
+            <li>
+                <strong>{{ comment.author }}</strong> ({{ comment.created_at|date:"d M Y H:i" }}):<br>
+                {{ comment.text }}
+            </li>
+        {% empty %}
+            <li>Комментариев пока нет.</li>
+        {% endfor %}
+    </ul>
+
+    <hr>
+
+    <h3>Добавить комментарий</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Отправить</button>
+    </form>
+
+    <br>
+    <a href="{% url 'task-list' %}">Назад к списку задач</a>
+</div>
+{% endblock %}

@@ -7,6 +7,10 @@
 
     <p><strong>Статус:</strong> {{ task.status }}</p>
 
+    <p><strong>Цена:</strong> {{ task.price }}$</p>
+
+    <p><strong>Тип задания:</strong> {{ task.types }}</p>
+
     <p><strong>Дедлайн:</strong>
         {% if task.deadline %}
             {{ task.deadline|date:"d M Y H:i" }}

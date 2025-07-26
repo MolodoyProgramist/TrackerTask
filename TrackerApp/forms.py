@@ -6,10 +6,32 @@ from django.forms import DateInput
 from .models import  Task, Comment
 
 
+#class TaskFilterForm(forms.Form):
+    #type = forms.ChoiceField(
+        #choices=[('', 'Все типы')] + Task.TYPE_TASK,
+        #required=False,
+        #label='Тип'
+    #)
+    #status = forms.ChoiceField(
+        #choices=[('', 'Все статусы')] + Task.STATUS_CHOICES,
+        #required=False,
+        #label='Статус'
+    #)
+    #priority = forms.ChoiceField(
+        #choices=[('', 'Все приоритеты')] + Task.PRIORITY_CHOICES,
+        #required=False,
+        #label='Приоритет'
+    #)
+    #min_price = forms.DecimalField(required=False, label='Мин. цена', min_value=0)
+    #max_price = forms.DecimalField(required=False, label='Макс. цена', min_value=0)
+
+
+
+
 class TaskForm(forms.ModelForm):
      class Meta:
          model = Task
-         fields = ['title', 'description', 'author', 'status', 'priority', 'deadline']
+         fields = ['title', 'description', 'type', 'price', 'author', 'status', 'priority', 'deadline']
 
          widgets = {
              'deadline': forms.DateTimeInput(attrs={

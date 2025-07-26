@@ -11,6 +11,8 @@
                 <tr>
                     <th>Назва</th>
                     <th>Статус</th>
+                    <th>Цена</th>
+                    <th>Тип</th>
                     <th>Пріоритет</th>
                     <th>Термін</th>
                     <th>Автор</th>
@@ -21,6 +23,8 @@
                     <tr>
                         <td><a href="{% url 'task-detail' task.id %}">{{ task.title }}</a></td>
                         <td>{{ task.get_status_display }}</td>
+                        <td>{{ task.price }}$</td>
+                        <td>{{ task.get_type_display }}</td>
                         <td>{{ task.get_priority_display }}</td>
                         <td>{{ task.deadline|date:"d.m.Y H:i" }}</td>
                         <td>{{ task.author.username }}</td>

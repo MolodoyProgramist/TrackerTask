@@ -40,6 +40,7 @@ def TaskListView(request):
     tasks = Task.objects.all()
     return render(request, 'tasks/task_list.html', {'tasks': tasks})
 
+
 def TaskDetailView(request, pk):
     task = get_object_or_404(Task, pk=pk)
     comments = Comment.objects.filter(task=task).order_by('-created_at')
@@ -64,3 +65,40 @@ def TaskDetailView(request, pk):
 
 
 # Create your views here.
+
+#def TaskListView(request):
+    #model = Task
+    #template_name = 'tasks/task_list.html'
+    #context_object_name = 'tasks'
+    #tasks = Task.objects.all()
+
+    #def get_queryset(self):
+        #queryset = Task.objects.all()
+
+        #type_filter = self.request.GET.get('type')
+        #status_filter = self.request.GET.get('status')
+        #priority_filter = self.request.GET.get('priority')
+        #price_min = self.request.GET.get('price_min')
+        #price_max = self.request.GET.get('price_max')
+
+        #if type_filter:
+            #queryset = queryset.filter(type=type_filter)
+        #if status_filter:
+            #queryset = queryset.filter(status=status_filter)
+        #if priority_filter:
+            #queryset = queryset.filter(priority=priority_filter)
+        #if price_min:
+           #queryset = queryset.filter(price__gte=price_min)
+        #if price_max:
+            #queryset = queryset.filter(price__lte=price_max)
+
+        #return queryset
+
+    #def get_context_data(self, **kwargs):
+        #context = super().get_context_data(**kwargs)
+        #context['TYPE_TASK'] = Task.TYPE_TASK
+        #context['STATUS_CHOICES'] = Task.STATUS_CHOICES
+        #context['PRIORITY_CHOICES'] = Task.PRIORITY_CHOICES
+        #return context
+
+    #return render(request, 'tasks/task_list.html', {'tasks': tasks})

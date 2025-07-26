@@ -18,8 +18,21 @@ class Task(models.Model):
         ("medium", "Средний"),
         ("high", "Высокий"),
     ]
+
+    TYPE_TASK = [
+        ("Not selected", "Не выбрано"),
+        ("Programming", "Программирование"),
+        ("Design", "Дизайн"),
+        ("Testing", "Тестирование"),
+        ("Marketing", "Маркетинг / Реклама"),
+        ("Arbitrage", "Арбитраж(Трафика)"),
+        ("Editing", "Монтаж / Видеомонтаж"),
+    ]
+
     title = models.CharField(max_length=100)
     description = models.TextField(null=True, blank=True)
+    type = models.CharField(max_length=50, choices=TYPE_TASK, default="Not selected")
+    price = models.DecimalField(max_digits=9000000, decimal_places=2, default=0)
     author = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default="Не выбрано")
     priority = models.CharField(max_length=60, choices=PRIORITY_CHOICES, default="Не выбрано")

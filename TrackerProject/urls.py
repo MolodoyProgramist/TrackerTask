@@ -15,7 +15,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.shortcuts import redirect
+from django.urls import path, include
 
 from TrackerApp import views
 
@@ -25,4 +26,6 @@ urlpatterns = [
     path('tasks/create/', views.TaskCreateView, name='task-create'),
     path('tasks/<int:pk>/', views.TaskDetailView, name='task-detail'),
     path('tasks/<int:task_id>/comment/', views.CommentView, name='task-comment'),
+    path('', lambda request: redirect('login/', permanent=False)),
+    path('', include("auth_system.urls"))
 ]

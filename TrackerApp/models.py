@@ -26,6 +26,7 @@ class Task(models.Model):
     deadline = models.DateTimeField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
 
+
     def __str__(self):
         return self.title
 

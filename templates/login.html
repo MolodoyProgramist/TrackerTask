@@ -1,10 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block content %}
+    <div class="container">
+      <form method="post" class="form-signin" novalidate>
+        {% csrf_token %}
+        <h2 class="form-signin-heading">Вхід</h2>
+
+        <label for="id_username" class="sr-only">Ім'я користувача</label>
+        <input
+          type="text"
+          name="username"
+          autofocus
+          required
+          class="form-control"
+          placeholder="Ім'я користувача"
+          id="id_username"
+        />
+
+        <label for="id_password" class="sr-only">Пароль</label>
+        <input
+          type="password"
+          name="password"
+          required
+          class="form-control"
+          placeholder="Пароль"
+          id="id_password"
+        />
+
+        <button class="btn btn-primary login-btn"  type="submit">Увійти</button>
+
+        {% if form.errors %}
+          <div class="alert alert-danger">
+            Невірне ім’я користувача або пароль.
+          </div>
+        {% endif %}
+
+        <p class="text-center">
+          Ще не маєте акаунту?
+          <a href="{% url 'register' %}">Зареєструватися</a>
+        </p>
+      </form>
+    </div>
+{% endblock %}
+

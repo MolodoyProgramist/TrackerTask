@@ -312,3 +312,206 @@ p {
 .text-center a:hover {
     text-decoration: underline;
 }
+
+
+.btn-finish {
+    background-color: #7d00de; /* твой фиолетовый */
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.btn-finish:hover {
+    background-color: #5a00a3;
+    color: #fff;
+}
+
+.btn-delete {
+    background-color: transparent;
+    color: #7d00de;
+    border: 2px solid #7d00de;
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-delete:hover {
+    background-color: #7d00de;
+    color: #fff;
+}
+
+.profile-container {
+    width: 115%;
+    max-width: 1200px;
+    margin:  0 auto;
+    padding: 70px 50px;
+    background: #ffffff;
+    border-radius: 35px;
+    box-shadow: 0 6px 40px rgba(0, 0, 0, 0.12);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333333;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    margin-bottom: 50px;
+}
+
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 52px;
+    color: white;
+    font-weight: bold;
+    border: 4px solid #6366f1;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    background-color: #ccc; /* будет перезаписан JS */
+}
+.profile-info {
+    flex: 1;
+}
+
+.profile-name {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 3px;
+    margin-right: 600px;
+    color: #1f2937;
+}
+
+.profile-role {
+    font-size: 1rem;
+    color: #6b7280;
+    margin-bottom: 14px;
+}
+
+.logout-button {
+    padding: 10px 24px;
+    background: #ef4444;
+    color: white;
+    font-weight: 600;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
+
+.logout-button:hover {
+    background: #dc2626;
+}
+
+.profile-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    gap: 20px;
+}
+
+.stat {
+    flex: 1;
+    text-align: center;
+    background: #f3f4f6;
+    padding: 22px 16px;
+    border-radius: 16px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 6px;
+}
+
+.stat-label {
+    color: #6b7280;
+    font-size: 1rem;
+}
+
+.tasks-section h3,
+.comments-section h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #111827;
+}
+
+.tasks-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+    margin-bottom: 40px;
+}
+
+.tasks-table th {
+    background-color: #4f46e5;
+    color: white;
+    font-weight: 600;
+    padding: 14px 12px;
+    text-align: left;
+    border-radius: 12px 12px 0 0;
+}
+
+.tasks-table td {
+    background-color: #f9fafb;
+    padding: 14px 12px;
+    border-bottom: 8px solid transparent;
+    border-radius: 0 0 12px 12px;
+    vertical-align: middle;
+    font-size: 1rem;
+    color: #374151;
+}
+
+/* Статусы задач с разным цветом */
+.status {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: inline-block;
+    text-transform: capitalize;
+}
+
+.status.в-ожидании {
+    background-color: #fbbf24;
+    color: #78350f;
+}
+
+.status.выполнено {
+    background-color: #22c55e;
+    color: #166534;
+}
+
+.status.в-работе {
+    background-color: #3b82f6;
+    color: #1e40af;
+}
+
+.comments-list {
+    list-style: none;
+    padding: 0;
+    font-size: 1rem;
+    color: #4b5563;
+}
+
+.comments-list li {
+    margin-bottom: 14px;
+}
+
+.comment-date {
+    font-size: 0.8rem;
+    color: #9ca3af;
+    margin-left: 10px;
+    font-style: italic;
+}

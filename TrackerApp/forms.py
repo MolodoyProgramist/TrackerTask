@@ -61,6 +61,13 @@ class UserRegistrationForm(forms.ModelForm):
             raise forms.ValidationError('Паролі не співпадають')
         return cd.get('password2')
 
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.set_password(self.cleaned_data['password'])  # важный момент — хэшируем пароль
+        if commit:
+            user.save()
+        return user
+
 class UserLoginForm(AuthenticationForm):
     username = forms.CharField(label='Ім’я користувача')
     password = forms.CharField(label='Пароль', widget=forms.PasswordInput)

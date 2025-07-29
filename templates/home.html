@@ -1,8 +1,81 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="profile-container">
+    <div class="profile-header">
+        <img src="{% if user.profile.avatar %}{{ user.profile.avatar.url }}{% else %}https://via.placeholder.com/120{% endif %}"
+             alt="User Avatar" class="profile-avatar">
+        <div class="profile-info">
+            <h2 class="profile-name">{{ user.get_full_name|default:user.username }}</h2>
+            <p class="profile-role">{{ user.email }}</p>
+            <a href="{% url 'task-list' %}" class="btn btn-primary">✅ Активные задачи</a>
+            <a href="{% url 'task-create' %}" class="btn btn-primary">📝 Додати завдання</a>
+            <a href="{% url 'task-list' %}" class="btn btn-success">📝 Правка</a>
+            <a href="{% url 'logout' %}" class="logout-button">🔓 Выход</a>
+        </div>
+    </div>
 
-<div class="welcome-conteiner">
-    <h1>Hello World!</h1>
+    <div class="profile-stats">
+        <div class="stat">
+            <span class="stat-number">{{ tasks.count }}</span>
+            <span class="stat-label">Всего создано задач</span>
+        </div>
+        <div class="stat">
+            <span class="stat-number">{{ tasks_completed }}</span>
+            <span class="stat-label">Завершено</span>
+        </div>
+        <div class="stat">
+            <span class="stat-number">{{ comments.count }}</span>
+            <span class="stat-label">Комментариев</span>
+        </div>
+    </div>
+
+    <div class="tasks-section">
+        <h3>Мои задачи</h3>
+        <table class="tasks-table">
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Статус</th>
+                    <th>Зарплата</th>
+                    <th>Тип</th>
+                    <th>Пріоритет</th>
+                    <th>Термін</th>
+                    <th>Автор</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <td><a href="{% url 'task-detail' task.id %}" class="text-decoration-none text-primary">{{ task.title }}</a></td>
+                    <td>{{ task.get_status_display }}</td>
+                    <td>{{ task.price }}$</td>
+                    <td>{{ task.get_type_display }}</td>
+                    <td>{{ task.get_priority_display }}</td>
+                    <td>{{ task.deadline|date:"d.m.Y H:i" }}</td>
+                    <td>{{ task.author.username }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">У вас пока нет задач</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="comments-section">
+        <h3>Мои комментарии</h3>
+        <ul class="comments-list">
+            {% for comment in comments %}
+            <li>
+                <strong>{{ comment.task.title }}</strong>: {{ comment.text }}
+                <span class="comment-date">{{ comment.created_at|date:"d.m.Y H:i" }}</span>
+            </li>
+            {% empty %}
+            <li>Вы ещё не оставили комментариев</li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 {% endblock %}

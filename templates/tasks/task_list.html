@@ -2,12 +2,13 @@
 
 {% block content %}
 <div class="container mt-4">
-    <h1>Список завдань</h1>
-    <a href="{% url 'task-create' %}" class="btn btn-primary mb-3">Створити завдання</a>
+    <h1 class="mb-4">Список завдань</h1>
+    <a href="{% url 'home' %}" class="btn btn-primary mb-3">Профиль</a>
+
 
     {% if tasks %}
-        <table class="table table-striped">
-            <thead>
+        <table class="table table-hover align-middle shadow-sm">
+            <thead class="table-light">
                 <tr>
                     <th>Назва</th>
                     <th>Статус</th>
@@ -21,7 +22,7 @@
             <tbody>
                 {% for task in tasks %}
                     <tr>
-                        <td><a href="{% url 'task-detail' task.id %}">{{ task.title }}</a></td>
+                        <td><a href="{% url 'task-detail' task.id %}" class="text-decoration-none text-primary">{{ task.title }}</a></td>
                         <td>{{ task.get_status_display }}</td>
                         <td>{{ task.price }}$</td>
                         <td>{{ task.get_type_display }}</td>
@@ -33,7 +34,7 @@
             </tbody>
         </table>
     {% else %}
-        <p>Поки що немає завдань.</p>
+        <p class="text-muted">Поки що немає завдань.</p>
     {% endif %}
 </div>
 {% endblock %}

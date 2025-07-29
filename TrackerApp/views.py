@@ -1,8 +1,11 @@
+from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.http import request
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.defaulttags import comment
 
-from .forms import TaskForm, CommentForm
+from .forms import TaskForm, CommentForm, UserRegistrationForm
 # from .forms import TaskForm, CommentForm
 from .models import  Task, Comment
 
@@ -41,6 +44,8 @@ def TaskListView(request):
     return render(request, 'tasks/task_list.html', {'tasks': tasks})
 
 
+
+
 def TaskDetailView(request, pk):
     task = get_object_or_404(Task, pk=pk)
     comments = Comment.objects.filter(task=task).order_by('-created_at')
@@ -62,6 +67,43 @@ def TaskDetailView(request, pk):
         'comments': comments,
         'form': form,
     })
+
+@login_required
+def profile_view(request):
+    tasks = Task.objects.filter(author=request.user)
+    comments = Comment.objects.filter(author=request.user)
+    tasks_completed = tasks.filter(status="Готово").count()
+    return render(request, "home.html", {
+        "tasks": tasks,
+        "comments": comments,
+        "tasks_completed": tasks_completed
+    })
+
+def register_view(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('home')
+    else:
+        form = UserRegistrationForm()
+    return render(request, 'register.html', {'form': form})
+
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('home')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'login.html', {'form': form})
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
 
 
 # Create your views here.

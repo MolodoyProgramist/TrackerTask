@@ -17,7 +17,6 @@ Including another URLconf
 from django.contrib import admin
 from django.shortcuts import redirect
 from django.urls import path, include
-
 from TrackerApp import views
 
 urlpatterns = [
@@ -26,6 +25,16 @@ urlpatterns = [
     path('tasks/create/', views.TaskCreateView, name='task-create'),
     path('tasks/<int:pk>/', views.TaskDetailView, name='task-detail'),
     path('tasks/<int:task_id>/comment/', views.CommentView, name='task-comment'),
-    path('', lambda request: redirect('login/', permanent=False)),
-    path('', include("auth_system.urls"))
+    path('register/', views.register_view, name='register'),
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
+    path('home/', views.profile_view, name='home'),
+
+    # Либо на home, либо на login, но не оба
+    path('', lambda request: redirect('home/', permanent=False)),
+
+    # Добавляем include в конце, если нужно
+    path('', include("auth_system.urls")),
 ]
+#<th class="text-center">Дії</th>
+#<a href="{% url 'task-create' %}" class="btn btn-primary mb-3">Створити завдання</a>

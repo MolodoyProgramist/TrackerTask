@@ -79,6 +79,26 @@ def profile_view(request):
         "tasks_completed": tasks_completed
     })
 
+@login_required
+def task_edit_selection(request):
+    user_tasks = Task.objects.filter(author=request.user)  # ← Сюда смотри!
+    return render(request, 'task_edit_selection.html', {'user_tasks': user_tasks})
+
+@login_required
+def task_edit_view(request, pk):
+    task = get_object_or_404(Task, pk=pk, author=request.user)
+
+    if request.method == 'POST':
+        form = TaskForm(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            return redirect('task-detail', pk=task.pk)
+    else:
+        form = TaskForm(instance=task)
+
+    return render(request, 'tasks/task_edit.html', {'form': form, 'task': task})
+
+
 def register_view(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)

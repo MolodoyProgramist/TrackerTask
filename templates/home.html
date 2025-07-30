@@ -10,7 +10,7 @@
             <p class="profile-role">{{ user.email }}</p>
             <a href="{% url 'task-list' %}" class="btn btn-primary">✅ Активные задачи</a>
             <a href="{% url 'task-create' %}" class="btn btn-primary">📝 Додати завдання</a>
-            <a href="{% url 'task-list' %}" class="btn btn-success">📝 Правка</a>
+            <a href="{% url 'task-edit-select' %}" class="btn btn-success">📝 Правка</a>
             <a href="{% url 'logout' %}" class="logout-button">🔓 Выход</a>
         </div>
     </div>

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="form-register">  <!-- Обернули белым блоком -->
+    <h2>Выберите задачу для редактирования</h2>
+    <ul class="task-list">
+        {% for task in user_tasks %}
+        <li class="task-item">
+            {{ task.title }}
+            <a class="btn btn-primary" href="{% url 'task-edit' task.pk %}">Редактировать</a>
+
+        </li>
+        {% empty %}
+        <li>У вас нет задач для редактирования.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
